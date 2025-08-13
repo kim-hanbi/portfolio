@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Information Security Portfolio — Hanbi Kim</title>
+  <meta name="description" content="Information Security portfolio: attack simulation, IDS/IPS rules, log analysis, and remediation labs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="container">
+      <div class="brand">
+        <div class="logo">🔒</div>
+        <a href="#top" class="brand-name">Hanbi Kim</a>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-controls="menu" aria-expanded="false">Menu</button>
+        <ul id="menu" class="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#labs">Labs</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#certs">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="home" class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Information Security Portfolio</p>
+          <h1>Reducing risk and increasing trust with<br/><span class="gradient">AI & Security</span></h1>
+          <p class="sub">
+            I reproduce attack chains, collect defender-side logs, craft detection rules (Snort/OSSEC), and automate triage scripts to close the loop from attack → detection → response.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-ghost" href="resume.pdf" download>Download Resume</a>
+          </div>
+          <p class="note">Latest work: Snort rule tuning & Wazuh (OSSEC) event triage automation</p>
+        </div>
+        <div class="hero-art" role="img" aria-label="Cyber security network hologram">
+          <div class="grid-bg"></div>
+          <div class="orb orb-a"></div>
+          <div class="orb orb-b"></div>
+          <div class="lock">
+            <svg width="120" height="140" viewBox="0 0 120 140" fill="none" aria-hidden="true">
+              <rect x="10" y="60" width="100" height="70" rx="12" class="svg-accent"/>
+              <path d="M30 60V40c0-17 13-30 30-30s30 13 30 30v20" class="svg-stroke"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value / Services -->
+    <section class="section services">
+      <div class="container cards">
+        <article class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Attack Simulation</h3>
+          <p>Kali/Metasploit to reproduce attacks, then capture telemetry from the blue side.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">📈</div>
+          <h3>Detection Rules</h3>
+          <p>Snort/Suricata signatures and OSSEC/Wazuh rules templatized for reuse.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">🧪</div>
+          <h3>Log Analysis</h3>
+          <p>Sysmon · Zeek · Wazuh event correlation and incident timeline building.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Automation</h3>
+          <p>Regex/Python helpers for triage and reporting.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <div class="container">
+        <header class="section-hd">
+          <h2>Projects</h2>
+          <p class="sub">End-to-end flow: attack reproduction → detection → response.</p>
+        </header>
+        <div class="grid cards project-cards">
+          <article class="card project">
+            <img src="assets/snort-ci.jpg" alt="Snort detection dashboard" />
+            <div class="card-body">
+              <h3>HTTP Command Injection Detection (Snort)</h3>
+              <p>Custom Snort rules to detect suspicious payloads and outbound C2 beacons; included PCAPs and evaluation metrics.</p>
+              <p class="meta">Stack: Snort · Kali · Rocky Linux</p>
+              <a class="btn btn-sm" href="#" aria-label="Read more about Snort CI project">Details</a>
+            </div>
+          </article>
+          <article class="card project">
+            <img src="assets/ossec-wazuh.jpg" alt="Wazuh/OSSEC event triage" />
+            <div class="card-body">
+              <h3>OSSEC/Wazuh Rule Pack & Triage</h3>
+              <p>Wazuh decoders + rules for Windows/Linux hosts, with a lightweight triage script that tags severity.</p>
+              <p class="meta">Stack: Wazuh(OSSEC) · Python · Sysmon</p>
+              <a class="btn btn-sm" href="#" aria-label="Read more about Wazuh rule pack project">Details</a>
+            </div>
+          </article>
+          <article class="card project">
+            <img src="assets/zeek-timeline.jpg" alt="Zeek timeline view" />
+            <div class="card-body">
+              <h3>Zeek-based Incident Timeline</h3>
+              <p>Using Zeek logs to reconstruct attacker movement and lateral activity across subnets.</p>
+              <p class="meta">Stack: Zeek · Wireshark · Python</p>
+              <a class="btn btn-sm" href="#" aria-label="Read more about Zeek timeline project">Details</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Labs -->
+    <section id="labs" class="section alt">
+      <div class="container">
+        <header class="section-hd">
+          <h2>Labs</h2>
+          <p class="sub">Hands-on notes & checklists per tool/protocol.</p>
+        </header>
+        <ul class="lab-list">
+          <li>Wireshark filters for HTTP/S, DNS exfiltration, TLS JA3 fingerprints</li>
+          <li>OSSEC local rules for Windows 10 and Ubuntu servers</li>
+          <li>Nmap service detection & NSE scripts for baseline hardening checks</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section">
+      <div class="container">
+        <header class="section-hd">
+          <h2>Skills</h2>
+        </header>
+        <div class="skills-grid">
+          <div class="skill-col">
+            <h3>Networking</h3>
+            <p>TCP/IP, VLAN, NAT, DNS, HTTP/S, OpenVPN</p>
+          </div>
+          <div class="skill-col">
+            <h3>Security Tools</h3>
+            <p>Snort, Suricata, OSSEC/Wazuh, Wireshark, Nmap, Zeek</p>
+          </div>
+          <div class="skill-col">
+            <h3>Operating Systems</h3>
+            <p>Rocky/Ubuntu, Windows 10/Server, pfSense</p>
+          </div>
+          <div class="skill-col">
+            <h3>Scripting</h3>
+            <p>Python, Bash, Regex</p>
+          </div>
+          <div class="skill-col">
+            <h3>Cloud & Etc</h3>
+            <p>Proxmox/GNS3, Git/GitHub, Markdown</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certs" class="section alt">
+      <div class="container">
+        <header class="section-hd">
+          <h2>Certifications</h2>
+        </header>
+        <ol class="timeline">
+          <li><time>2025 H2 (planned)</time> Information Processing Engineer (written), Linux Master 2, Network Manager 2</li>
+          <li><time>2026 H1 (planned)</time> Information Processing Engineer (practical)</li>
+          <li><time>2027 H1 (goal)</time> Information Security Engineer</li>
+          <li><time>2028+</time> CISSP / CEH</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <header class="section-hd">
+          <h2>Contact</h2>
+        </header>
+        <div class="contact">
+          <p><strong>Email</strong> — yourname@domain.com</p>
+          <p><strong>GitHub</strong> — <a href="https://github.com/yourid" target="_blank" rel="noopener">github.com/yourid</a></p>
+          <p><strong>Blog</strong> — <a href="#" target="_blank" rel="noopener">Link</a></p>
+          <p><strong>LinkedIn</strong> — <a href="#" target="_blank" rel="noopener">Link</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Hanbi Kim · Built for GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
