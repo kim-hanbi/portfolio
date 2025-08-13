@@ -46,16 +46,24 @@
 
 <div class="lab-step">
   <h3>4. Firewall Rule - webterm1 → R1</h3>
-  <img src="image/5.png" alt="webterm1 http/telnet R1" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+ <img src="image/5.png" alt="Firefox3 HTTP 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+ <img src="image/6.png" alt="Firefox3 Telnet 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
   <p>webterm1에서 R1로 HTTP와 Telnet 접속이 정상적으로 허용되는 것을 확인한 결과입니다.</p>
 </div>
 
 <div class="lab-step">
   <h3>5. Firewall Rule - webterm2 → PC1</h3>
-  <img src="image/6.png" alt="webterm2 ping PC1" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <img src="image/7.png" alt="webterm2 ping PC1" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
   <p>webterm2에서 PC1으로 Ping 요청이 정상적으로 허용되는 것을 확인한 결과입니다.</p>
 </div>
-       
+
+        <h3>HSRP 결과</h3>
+  <img src="image/8.png" alt="HSRP Standby 상태" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <img src="image/9.png" alt="HSRP Active 상태" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <img src="image/10.png" alt="HSRP Active 라우터 Ping 테스트" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>HSRP 구성 결과, R3 라우터가 Standby 역할을 수행하고 있으며, Active 라우터가 정상적으로 동작하는 것을 확인하였습니다.</p>
+</div>
+
 </div>
 
       </p>
@@ -86,6 +94,7 @@
   </script>
 </body>
 </html>
+
 
 
 
