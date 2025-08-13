@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>네트워크 보안 실습 환경 구축</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container">
+      <div class="brand">
+        <div class="logo">🔒</div>
+        <a href="index.html" class="brand-name">Hanbi Kim</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <h1>네트워크 보안 실습 환경 구축 (Snort)</h1>
+        <p class="sub">Firewall · IDS/IPS · HIDS · VPN 통합 구성 및 탐지 규칙 작성</p>
+        
+        <img src="assets/networksecurity-portfolio-202508.png" alt="네트워크 보안 다이어그램" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+
+        <h2>프로젝트 개요</h2>
+        <p>
+          본 프로젝트는 다계층 보안 솔루션(Firewall, IDS/IPS, HIDS, VPN)을 통합한 네트워크 실습 환경을 설계 및 구현한 것입니다.
+          Snort, Suricata, OSSEC 기반의 탐지 규칙을 작성하여 HTTP, Ping, Command Injection, DDoS 등 다양한 공격을 시뮬레이션하고
+          탐지 결과를 분석하였습니다.
+        </p>
+
+        <h2>구성 요소</h2>
+        <ul>
+          <li><strong>방화벽</strong>: Cisco ASAv, pfSense</li>
+          <li><strong>IDS/IPS</strong>: Snort, Suricata</li>
+          <li><strong>HIDS</strong>: OSSEC/Wazuh</li>
+          <li><strong>VPN</strong>: pfSense OpenVPN</li>
+          <li><strong>서버 OS</strong>: Rocky Linux, Ubuntu</li>
+        </ul>
+
+        <h2>탐지 규칙 예시</h2>
+        <ul>
+          <li>Win10 → OSSEC : HTTP, Ping 탐지</li>
+          <li>CentOS7 → Win10 : Ping 탐지</li>
+          <li>HIDS → CentOS7 : Command Injection 탐지</li>
+          <li>Kali → Win10 : DDoS 공격 탐지</li>
+          <li>Kali → CentOS7 : SYN Scan 탐지</li>
+        </ul>
+
+        <h2>결과</h2>
+        <p>
+          각 공격 시나리오에 대해 IDS/IPS 및 HIDS가 정상적으로 탐지하였으며,
+          로그 분석과 규칙 튜닝을 통해 오탐(false positive)을 줄였습니다.
+        </p>
+
+        <p style="margin-top:30px;">
+          <a class="btn btn-primary" href="index.html">← 메인 페이지로 돌아가기</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Hanbi Kim · Network Security Lab Project</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
