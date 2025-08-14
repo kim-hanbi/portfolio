@@ -64,6 +64,57 @@
   <p>HSRP 구성 결과, R3 라우터가 Standby 역할을 수행하고 있으며, Active 라우터가 정상적으로 동작하는 것을 확인하였습니다.</p>
 </div>
 
+<div class="lab-step">
+  <h3>OpenVPN - Windows10 → pfSense</h3>
+  <img src="image/10.png" alt="OpenVPN 접속 결과 1" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <img src="image/11.png" alt="OpenVPN 접속 결과 2" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <img src="image/12.png" alt="OpenVPN 접속 결과 3" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>Windows10 환경에서 OpenVPN 클라이언트를 이용하여 pfSense OpenVPN 서버에 접속한 결과입니다.  
+  모든 연결 시도가 정상적으로 완료되었으며, VPN을 통한 내부 네트워크 접근이 가능함을 확인하였습니다.</p>
+</div>
+
+      <h2>Snort Rule 설정</h2>
+<div class="lab-step">
+  <img src="image/14.png" alt="Snort Rule 설정 화면" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>Snort에 적용된 탐지 규칙 목록입니다. 각 규칙은 다양한 공격 유형을 탐지하도록 설정되어 있으며, 아래 실습 결과에서 해당 규칙들이 정상적으로 동작하는지 확인하였습니다.</p>
+</div>
+
+      <h2>Snort Rule 실습 결과</h2>
+
+<div class="lab-step">
+  <h3>1. Snort Rule - Win10 → OSSEC</h3>
+  <img src="image/15.png" alt="Win10 → OSSEC http/ping 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>Win10에서 OSSEC 서버로 HTTP, Ping 요청이 탐지되는 것을 확인한 결과입니다.</p>
+</div>
+
+<div class="lab-step">
+  <h3>2. Snort Rule - CentOS7 → Win10</h3>
+  <img src="image/16.png" alt="CentOS7 → Win10 ping 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>CentOS7에서 Win10으로 Ping 요청이 탐지되는 것을 확인한 결과입니다.</p>
+</div>
+
+<div class="lab-step">
+  <h3>3. Snort Rule - HIDS → CentOS7</h3>
+  <img src="image/17.png" alt="Command Injection 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>HIDS에서 CentOS7로 /etc/passwd 파일을 이용한 Command Injection 공격이 탐지되는 것을 확인한 결과입니다.</p>
+</div>
+
+<div class="lab-step">
+  <h3>4. Snort Rule - Kali → Win10</h3>
+  <img src="image/18.png" alt="Rand Source Attack DDoS 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>Kali에서 Win10으로 Rand Source Attack DDoS 공격이 탐지되는 것을 확인한 결과입니다.</p>
+</div>
+
+<div class="lab-step">
+  <h3>5. Snort Rule - Kali → CentOS7</h3>
+  <img src="image/19.png" alt="SYN Flag Scanning 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+  <p>Kali에서 CentOS7로 SYN Flag Scanning이 탐지되는 것을 확인한 결과입니다.</p>
+</div>
+
+
+
+
+      
 </div>
 
       </p>
@@ -94,6 +145,7 @@
   </script>
 </body>
 </html>
+
 
 
 
