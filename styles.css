@@ -10,7 +10,7 @@
   --border:#1F2937;
   --radius:16px;
   --shadow:0 10px 30px rgba(0,0,0,.35);
-  --max:1120px;
+  --max:1440px;           /* 기존 1120px → 넓힘 (한 줄 유지 도움) */
   --gutter:24px;
 }
 *{box-sizing:border-box}
@@ -119,17 +119,20 @@ body{
   .hero h1{font-size:2.0rem}
 }
 
+/* === 한 줄 이미지 행: 원본 크기 유지, 설명은 아래 === */
 .img-row{
   display:flex;
-  gap:12px;               /* 이미지 간 간격 */
-  flex-wrap:nowrap;       /* 줄바꿈 금지 */
-  justify-content:space-between;
+  gap:12px;
+  flex-wrap:nowrap;            /* 한 줄 고정 */
+  align-items:flex-start;
+  overflow-x:auto;             /* 한 줄 유지하며 넘치면 행에만 스크롤 */
+  padding:4px 0 8px;
 }
 .img-row img{
-  flex:0 0 calc((100% - 24px)/3);  /* 12px 간격 * 2 = 24px */
-  width:calc((100% - 24px)/3);
+  display:block;
+  width:auto;                  /* 원본 크기 */
   height:auto;
-  margin:0 !important;             /* 인라인 margin 무력화 */
-  max-width:none !important;       /* 인라인 max-width:100% 무력화 */
+  max-width:none !important;   /* 인라인/기본 max-width 제거 */
+  margin:0 !important;         /* 인라인 margin 제거 */
   border:1px solid #ccc;
 }
