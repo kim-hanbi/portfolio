@@ -118,3 +118,17 @@ body{
   .skills-grid{grid-template-columns:1fr}
   .hero h1{font-size:2.0rem}
 }
+.img-row {
+  display: flex;         /* 가로 배치 */
+  gap: 12px;              /* 이미지 간격 */
+  flex-wrap: wrap;        /* 화면이 좁으면 줄바꿈 */
+  justify-content: center;/* 가운데 정렬 */
+}
+
+.img-row img {
+  flex: 1 1 auto;         /* 남는 공간 채우기 */
+  max-width: 33%;         /* 3장 기준, 필요 시 25%나 50%로 변경 */
+  height: auto;
+  border: 1px solid #ccc;
+  margin: 0 !important;   /* 기존 인라인 margin 제거 */
+}
