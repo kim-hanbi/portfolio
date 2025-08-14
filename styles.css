@@ -118,17 +118,18 @@ body{
   .skills-grid{grid-template-columns:1fr}
   .hero h1{font-size:2.0rem}
 }
-.img-row {
-  display: flex;         /* 가로 배치 */
-  gap: 12px;              /* 이미지 간격 */
-  flex-wrap: wrap;        /* 화면이 좁으면 줄바꿈 */
-  justify-content: center;/* 가운데 정렬 */
-}
 
-.img-row img {
-  flex: 1 1 auto;         /* 남는 공간 채우기 */
-  max-width: 33%;         /* 3장 기준, 필요 시 25%나 50%로 변경 */
-  height: auto;
-  border: 1px solid #ccc;
-  margin: 0 !important;   /* 기존 인라인 margin 제거 */
+.img-row{
+  display:flex;
+  gap:12px;               /* 이미지 간 간격 */
+  flex-wrap:nowrap;       /* 줄바꿈 금지 */
+  justify-content:space-between;
+}
+.img-row img{
+  flex:0 0 calc((100% - 24px)/3);  /* 12px 간격 * 2 = 24px */
+  width:calc((100% - 24px)/3);
+  height:auto;
+  margin:0 !important;             /* 인라인 margin 무력화 */
+  max-width:none !important;       /* 인라인 max-width:100% 무력화 */
+  border:1px solid #ccc;
 }
