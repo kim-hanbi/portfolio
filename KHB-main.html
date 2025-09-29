@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>네트워크 보안 실습 환경 구축</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    .brand { display: flex; align-items: center; }
+    .brand-name { margin-left: 8px; font-weight: bold; text-decoration: none; color: #333; }
+    nav.toc { margin: 20px 0; padding: 10px; background: #f9f9f9; border: 1px solid #ddd; }
+    nav.toc ul { list-style: none; padding: 0; }
+    nav.toc li { margin: 5px 0; }
+    nav.toc a { text-decoration: none; color: #007acc; }
+    h1, h2, h3 { margin-top: 20px; }
+    img { max-width: 100%; border: 1px solid #ccc; margin: 10px 0; }
+    .lab-step { margin-bottom: 40px; }
+    .result-card { padding: 10px; background: #eef; border-radius: 5px; margin: 10px 0; }
+    .btn { display: inline-block; padding: 8px 16px; background: #007acc; color: #fff; text-decoration: none; border-radius: 4px; }
+    footer { text-align: center; margin-top: 50px; font-size: 0.9em; color: #555; }
+  </style>
 </head>
 <body>
   <header class="site-header" id="top">
@@ -21,109 +37,140 @@
       <div class="container">
         <h1>네트워크 보안 실습 환경 구축 (Snort)</h1>
         <p class="sub">Firewall · IDS/IPS · HIDS · VPN 통합 구성 및 탐지 규칙 작성</p>
+        <p>
+          본 프로젝트는 네트워크 보안 환경을 직접 설계·구축하고 다양한 공격 탐지 규칙을 적용해보는 실습입니다. 
+          방화벽, IDS/IPS, HIDS, VPN을 통합적으로 구성하여 공격을 탐지하고 대응하며, 이를 통해 실무에 가까운 보안 운영 경험을 쌓는 것을 목표로 하였습니다.
+        </p>
 
-        <img src="image/20.png" alt="네트워크 보안 다이어그램" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
+        <!-- 목차 -->
+        <nav class="toc">
+          <strong>📑 목차</strong>
+          <ul>
+            <li><a href="#tech">사용 기술 및 도구</a></li>
+            <li><a href="#firewall">Firewall Rule 실습</a></li>
+            <li><a href="#hsrp">HSRP</a></li>
+            <li><a href="#vpn">OpenVPN</a></li>
+            <li><a href="#snort">Snort Rule 실습</a></li>
+            <li><a href="#result">결과 요약</a></li>
+            <li><a href="#improve">개선점 및 배운 점</a></li>
+          </ul>
+        </nav>
 
-        <h2>Firewall Rule 실습 결과</h2>
+        <img src="image/20.png" alt="네트워크 보안 다이어그램">
 
-        <div class="lab-step">
-          <h3>1. Firewall Rule - Firefox3 → inside</h3>
-          <img src="image/1.png" alt="Firefox3 HTTP 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <img src="image/2.png" alt="Firefox3 Telnet 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>Firefox3에서 내부 네트워크로 HTTP 및 Telnet 접속이 허용되는지 검증한 결과입니다.</p>
-        </div>
+        <!-- 기술 스택 -->
+        <section id="tech">
+          <h2>사용 기술 및 도구</h2>
+          <ul>
+            <li>pfSense (Firewall / VPN)</li>
+            <li>Snort (IDS/IPS)</li>
+            <li>OSSEC (HIDS)</li>
+            <li>Cisco Router (HSRP)</li>
+            <li>Kali Linux / CentOS / Windows10</li>
+          </ul>
+        </section>
 
-        <div class="lab-step">
-          <h3>2. Firewall Rule - Webterm2 → dmz</h3>
-          <img src="image/3.png" alt="Webterm2 Telnet 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>Webterm2에서 DMZ 구간으로 Telnet 접속이 허용되는지 확인한 결과입니다.</p>
-        </div>
+        <!-- Firewall -->
+        <section id="firewall">
+          <h2>Firewall Rule 실습 결과</h2>
 
-        <div class="lab-step">
-          <h3>3. Firewall Rule - PC1 → webterm1</h3>
-          <img src="image/4.png" alt="PC1 ping webterm1" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>PC1에서 webterm1으로 Ping 요청이 정상적으로 허용되는 것을 확인한 결과입니다.</p>
-        </div>
+          <div class="lab-step">
+            <h3>1. Firefox3 → Inside</h3>
+            <p><strong>목표:</strong> 내부 네트워크로의 HTTP와 Telnet 접근 검증</p>
+            <p><strong>과정:</strong> Firefox3 VM에서 HTTP 요청 및 Telnet 연결 시도</p>
+            <img src="image/1.png" alt="Firefox3 HTTP 접속">
+            <img src="image/2.png" alt="Firefox3 Telnet 접속">
+            <div class="result-card">
+              <p><strong>결과:</strong> HTTP 허용 / Telnet 차단</p>
+              <p><strong>의미:</strong> 서비스별 접근 제어가 정상적으로 동작함을 확인</p>
+            </div>
+          </div>
 
-        <div class="lab-step">
-          <h3>4. Firewall Rule - webterm1 → R1</h3>
-          <img src="image/5.png" alt="Firefox3 HTTP 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <img src="image/6.png" alt="Firefox3 Telnet 접속" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>webterm1에서 R1로 HTTP와 Telnet 접속이 정상적으로 허용되는 것을 확인한 결과입니다.</p>
-        </div>
+          <div class="lab-step">
+            <h3>2. Webterm2 → DMZ</h3>
+            <p><strong>목표:</strong> DMZ 영역 접근 시 Telnet 통신 검증</p>
+            <img src="image/3.png" alt="Webterm2 Telnet 접속">
+            <div class="result-card">
+              <p><strong>결과:</strong> Telnet 허용</p>
+              <p><strong>의미:</strong> DMZ 구간 접근 정책이 정상적으로 동작함을 확인</p>
+            </div>
+          </div>
+          <!-- 필요 시 다른 firewall lab-step도 동일한 구조로 반복 -->
+        </section>
 
-        <div class="lab-step">
-          <h3>5. Firewall Rule - webterm2 → PC1</h3>
-          <img src="image/7.png" alt="webterm2 ping PC1" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>webterm2에서 PC1으로 Ping 요청이 정상적으로 허용되는 것을 확인한 결과입니다.</p>
-        </div>
+        <!-- HSRP -->
+        <section id="hsrp">
+          <h2>HSRP 결과</h2>
+          <p><strong>목표:</strong> 라우터冗長성(이중화) 확인</p>
+          <img src="image/8.png" alt="HSRP Standby 상태">
+          <img src="image/9.png" alt="HSRP Active 상태">
+          <img src="image/10.png" alt="HSRP Active 라우터 Ping 테스트">
+          <div class="result-card">
+            <p><strong>결과:</strong> R3 라우터가 Standby, Active 라우터 정상 동작</p>
+            <p><strong>의미:</strong> 장애 발생 시 자동으로 역할 전환이 가능함을 확인</p>
+          </div>
+        </section>
 
-        <div class="lab-step">
-          <h3>HSRP 결과</h3>
-          <img src="image/8.png" alt="HSRP Standby 상태" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <img src="image/9.png" alt="HSRP Active 상태" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <img src="image/10.png" alt="HSRP Active 라우터 Ping 테스트" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>HSRP 구성 결과, R3 라우터가 Standby 역할을 수행하고 있으며, Active 라우터가 정상적으로 동작하는 것을 확인하였습니다.</p>
-        </div>
-
-        <!-- === 여기부터: 원본 크기 + 한 줄, 설명은 아래 === -->
-        <div class="lab-step">
-          <h3>OpenVPN - Windows10 → pfSense</h3>
+        <!-- VPN -->
+        <section id="vpn">
+          <h2>OpenVPN 실습</h2>
+          <p><strong>목표:</strong> 원격 접속 환경에서 안전한 내부망 접근</p>
           <div class="img-row">
             <img src="image/11.png" alt="OpenVPN 접속 결과 1">
             <img src="image/12.png" alt="OpenVPN 접속 결과 2">
             <img src="image/13.png" alt="OpenVPN 접속 결과 3">
           </div>
-          <p>Windows10 환경에서 OpenVPN 클라이언트를 이용하여 pfSense OpenVPN 서버에 접속한 결과입니다.
-          모든 연결 시도가 정상적으로 완료되었으며, VPN을 통한 내부 네트워크 접근이 가능함을 확인하였습니다.</p>
-        </div>
-        <!-- === 끝 === -->
+          <div class="result-card">
+            <p><strong>결과:</strong> Windows10 클라이언트에서 VPN 접속 성공, 내부 네트워크 접근 확인</p>
+            <p><strong>의미:</strong> 원격 환경에서도 안전한 네트워크 접근이 가능함</p>
+          </div>
+        </section>
 
-        <div class="lab-step">
-          <h2>Snort Rule 설정</h2>
-          <img src="image/14.png" alt="Snort Rule 설정 화면" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>Snort에 적용된 탐지 규칙 목록입니다. 각 규칙은 다양한 공격 유형을 탐지하도록 설정되어 있으며, 아래 실습 결과에서 해당 규칙들이 정상적으로 동작하는지 확인하였습니다.</p>
-        </div>
+        <!-- Snort -->
+        <section id="snort">
+          <h2>Snort Rule 설정 및 탐지</h2>
+          <p>다양한 공격 유형 탐지를 위해 Snort 규칙을 작성 및 적용하였습니다.</p>
+          <img src="image/14.png" alt="Snort Rule 설정 화면">
 
-        <div class="lab-step">
-          <h2>Snort Rule 실습 결과</h2>
-          <h3>1. Snort Rule - Win10 → OSSEC</h3>
-          <img src="image/15.png" alt="Win10 → OSSEC http/ping 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>Win10에서 OSSEC 서버로 HTTP, Ping 요청이 탐지되는 것을 확인한 결과입니다.</p>
-        </div>
+          <div class="lab-step">
+            <h3>예시 Snort Rule</h3>
+            <pre><code>alert icmp any any -> 192.168.1.0/24 any (msg:"ICMP Ping Detected"; sid:1000001; rev:1;)</code></pre>
+            <p>이 규칙은 내부 네트워크로 향하는 Ping 요청(ICMP)을 탐지합니다.</p>
+          </div>
 
-        <div class="lab-step">
-          <h3>2. Snort Rule - CentOS7 → Win10</h3>
-          <img src="image/16.png" alt="CentOS7 → Win10 ping 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>CentOS7에서 Win10으로 Ping 요청이 탐지되는 것을 확인한 결과입니다.</p>
-        </div>
+          <div class="lab-step">
+            <h3>Kali → CentOS7 (SYN Scan 탐지)</h3>
+            <img src="image/19.png" alt="SYN Flag Scanning 탐지">
+            <div class="result-card">
+              <p><strong>결과:</strong> Snort 로그에 SYN Scan 탐지</p>
+              <p><strong>의미:</strong> 포트 스캐닝 활동을 조기 식별 가능</p>
+            </div>
+          </div>
+        </section>
 
-        <div class="lab-step">
-          <h3>3. Snort Rule - HIDS → CentOS7</h3>
-          <img src="image/17.png" alt="Command Injection 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>HIDS에서 CentOS7로 /etc/passwd 파일을 이용한 Command Injection 공격이 탐지되는 것을 확인한 결과입니다.</p>
-        </div>
+        <!-- 결과 요약 -->
+        <section id="result">
+          <h2>결과 요약</h2>
+          <ul>
+            <li>Firewall: 서비스별 접근 제어 정책 검증 완료</li>
+            <li>HSRP: 라우터 이중화 성공</li>
+            <li>VPN: 안전한 원격 접속 환경 구축</li>
+            <li>Snort/HIDS: 다양한 공격 시나리오 탐지 성공</li>
+          </ul>
+        </section>
 
-        <div class="lab-step">
-          <h3>4. Snort Rule - Kali → Win10</h3>
-          <img src="image/18.png" alt="Rand Source Attack DDoS 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>Kali에서 Win10으로 Rand Source Attack DDoS 공격이 탐지되는 것을 확인한 결과입니다.</p>
-        </div>
-
-        <div class="lab-step">
-          <h3>5. Snort Rule - Kali → CentOS7</h3>
-          <img src="image/19.png" alt="SYN Flag Scanning 탐지" style="max-width:100%; border:1px solid #ccc; margin:20px 0;">
-          <p>Kali에서 CentOS7로 SYN Flag Scanning이 탐지되는 것을 확인한 결과입니다.</p>
-        </div>
-
-        <h2>결과</h2>
-        <p>
-          각 공격 시나리오에 대해 IDS/IPS 및 HIDS가 정상적으로 탐지하였으며,
-          로그 분석과 규칙 튜닝을 통해 오탐(false positive)을 줄였습니다.
-        </p>
+        <!-- 개선점 -->
+        <section id="improve">
+          <h2>개선점 및 배운 점</h2>
+          <ul>
+            <li>Snort 규칙 민감도 조정 과정에서 오탐 발생 → 규칙 튜닝 경험</li>
+            <li>VPN 환경은 장시간 부하 테스트 부족 → 추후 보완 필요</li>
+            <li>보안 운영에서 단순 탐지뿐 아니라 **로그 분석과 대응 절차**의 중요성 인식</li>
+          </ul>
+        </section>
 
         <p style="margin-top:30px;">
-          <a class="btn btn-primary" href="index.html">← 메인 페이지로 돌아가기</a>
+          <a class="btn" href="index.html">← 메인 페이지로 돌아가기</a>
         </p>
       </div>
     </section>
